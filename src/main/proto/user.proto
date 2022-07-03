@@ -1,0 +1,38 @@
+syntax = "proto3";
+package com.ask.grpc;
+
+option java_package = "com.ask.grpc.proto";
+option java_generic_services = true;
+option java_outer_classname = "UserDetailProto";
+option java_multiple_files = true;
+import "google/protobuf/empty.proto";
+
+service UserService {
+  rpc save(User) returns (User) {}
+  rpc get(User) returns (User) {}
+  rpc findAll (google.protobuf.Empty) returns (stream User) {}
+}
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  optional int32 age = 4;
+  repeated Address addresses = 5;
+}
+
+message Address {
+  string address1 = 1;
+  string address2 = 2;
+  string state = 3;
+  string city = 4;
+  string country = 5;
+  string phoneNumber = 6;
+  PhoneType phoneType = 7;
+}
+enum PhoneType {
+  MOBILE = 0;
+  HOME = 1;
+}
+
+
